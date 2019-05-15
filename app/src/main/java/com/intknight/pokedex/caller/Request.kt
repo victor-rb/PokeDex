@@ -1,6 +1,7 @@
 package com.intknight.pokedex.caller
 
 import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.AsyncTask.execute
 import android.util.Log
 import com.intknight.pokedex.doa.DescriptionService
@@ -12,11 +13,11 @@ import java.net.URL
 
 object Request {
 
-    val pokemon = PokemonModel()
-    
+    private val pokemon = PokemonModel()
 
-    private fun requestPokemon(index: String) : PokemonModel{
-        
+
+    private fun requestPokemon(index: String): PokemonModel {
+
         val baseUrl = "https://pokeapi.co/api/v2/"
 
         val retrofit = Retrofit.Builder()
@@ -29,9 +30,10 @@ object Request {
         val descService = retrofit.create(DescriptionService::class.java)
 
         val callPoke = pokeService.getPokemonService(index)
+        val callDesc = descService.getDescription(index)
 
         execute {
-            val body = callPoke.execute().body() ?: return@execute
+            val body = callPoke.execute().body()!!
 
 
             pokemon.name = body.name
@@ -39,9 +41,9 @@ object Request {
 
             pokemon.sprite.clear()
             pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.frontDefault).openStream()))
-            if (body.sprites?.backDefault != null)pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backDefault).openStream()))
+            if (body.sprites?.backDefault != null) pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backDefault).openStream()))
             pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.frontShiny).openStream()))
-            if (body.sprites?.backShiny != null)pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backShiny).openStream()))
+            if (body.sprites?.backShiny != null) pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backShiny).openStream()))
 
 
             pokemon.stats = arrayListOf(
@@ -62,9 +64,7 @@ object Request {
 
             pokemon.weight = body.weight.toString()
 
-            val callDesc = descService.getDescription(index)
-
-            var pokeBody = callDesc.execute().body()!!
+            val pokeBody = callDesc.execute().body()!!
 
             for (i in 0 until pokeBody.entries.size) {
                 if (pokeBody.entries[i].language?.name == "en") {
@@ -76,12 +76,17 @@ object Request {
             pokemon.shape = pokeBody.shape!!.name
         }
 
+        while (!callPoke.isExecuted || !callDesc.isExecuted){
+            Log.d("Exec |", "${callPoke.isExecuted.toString()} : ${callDesc.isExecuted}")
+        }
+
+        println(pokemon.name)
 
         return pokemon
     }
 
 
-     private fun setColor(type: String): String {
+    private fun setColor(type: String): String {
         val color = when (type) {
             "bug" -> "#e1cb45"
             "dark" -> "#452a1f"
@@ -106,7 +111,16 @@ object Request {
         return "<font color='$color'>${type.capitalize()}</font>"
     }
 
-    fun getToPage(index : String): PokemonModel{
+    fun getToPage(index: String): PokemonModel {
         return requestPokemon(index)
+    }
+
+    fun toList(start: Int, end: Int): ArrayList<PokemonModel> {
+        val pokemon = ArrayList<PokemonModel>()
+
+        for (i in start..end) {
+            pokemon.add(requestPokemon(i.toString()))
+        }
+        return pokemon
     }
 }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 
 data class PokemonModel (
 
+    var number  : String            = "DEFAULT_MODEL",
     var name    : String            = "DEFAULT_MODEL",
     var sprite  : ArrayList<Bitmap> = ArrayList(),
     var stats   : ArrayList<String> = ArrayList(),
