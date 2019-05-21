@@ -1,7 +1,9 @@
 package com.intknight.pokedex
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -28,6 +30,7 @@ import java.util.concurrent.Future
 import java.util.concurrent.FutureTask
 
 import kotlin.Exception
+import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +52,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var shinySwitch: Switch
 
-    lateinit var pokeSearch: EditText
+    lateinit var pokeSearch : EditText
+
+    lateinit var searchButton : Button
 
     var pokemon = PokemonModel()
 
@@ -78,9 +83,16 @@ class MainActivity : AppCompatActivity() {
         shinySwitch = findViewById(R.id.swShiny)
 
         pokeSearch = findViewById(R.id.poke_search)
+
+        searchButton = findViewById(R.id.searchBT)
         ////////////////////////////////////////////////////////////////
 
-        createPage()
+        val extra = intent.getStringExtra("index")
+
+        if (extra != null)createPage(extra)
+
+        else createPage()
+
 
         imageSeek.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
@@ -127,11 +139,10 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        val time = measureTimeMillis {
-            val pokeList = Request.toList(1, 151)
+        searchButton.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
+            startActivity(intent)
         }
-
-        Log.d("Exec Time |", time.toString())
 
     }
 
@@ -149,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 
         pokeNameTx.text = pokemon.name.capitalize()
         pokeTypeTx.text = Html.fromHtml(pokemon.type)
-        pokeWeightTx.text = pokemon.weight
+        pokeWeightTx.text = "${pokemon.weight} | ${pokemon.shape.capitalize()}"
 
         statHpTx.text = pokemon.stats[0]
         statAtkTx.text = pokemon.stats[1]
@@ -157,6 +168,7 @@ class MainActivity : AppCompatActivity() {
         statSpdTx.text = pokemon.stats[3]
         statXatkTx.text = pokemon.stats[4]
         statXdefTx.text = pokemon.stats[5]
+
         pokeDeskTx.text = pokemon.entry
 
 

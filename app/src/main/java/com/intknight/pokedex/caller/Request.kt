@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import android.os.AsyncTask.execute
 import android.util.Log
 import com.intknight.pokedex.doa.DescriptionService
+import com.intknight.pokedex.doa.PokeListService
 import com.intknight.pokedex.doa.PokemonModel
 import com.intknight.pokedex.doa.PokemonService
 import retrofit2.Retrofit
@@ -15,15 +16,17 @@ object Request {
 
     private val pokemon = PokemonModel()
 
+    private val baseUrl = "https://pokeapi.co/api/v2/"
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
 
     private fun requestPokemon(index: String): PokemonModel {
 
-        val baseUrl = "https://pokeapi.co/api/v2/"
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
 
         val pokeService = retrofit.create(PokemonService::class.java)
@@ -77,10 +80,9 @@ object Request {
         }
 
         while (!callPoke.isExecuted || !callDesc.isExecuted){
-            Log.d("Exec |", "${callPoke.isExecuted.toString()} : ${callDesc.isExecuted}")
+            Log.d("Exec |", "${callPoke.isExecuted} : ${callDesc.isExecuted}")
         }
 
-        println(pokemon.name)
 
         return pokemon
     }
@@ -115,12 +117,26 @@ object Request {
         return requestPokemon(index)
     }
 
-    fun toList(start: Int, end: Int): ArrayList<PokemonModel> {
-        val pokemon = ArrayList<PokemonModel>()
+    fun getToList() : ArrayList<String>{
 
-        for (i in start..end) {
-            pokemon.add(requestPokemon(i.toString()))
+        var pokemonList = ArrayList<String>()
+
+        val pokelistService = retrofit.create(PokeListService::class.java)
+        val call = pokelistService.getPokemonItem()
+
+        execute{
+            val body = call.execute().body()!!
+
+            for (i in 0 until  body.result.size){
+                pokemonList.add(body.result[i].name)
+            }
+
+            while(!call.isExecuted){
+                Log.d("Log Body |", "Wait...")
+            }
+
         }
-        return pokemon
+        return pokemonList
     }
+
 }
