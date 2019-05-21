@@ -1,37 +1,17 @@
 package com.intknight.pokedex
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.os.AsyncTask
-import android.os.AsyncTask.execute
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.util.Log
-import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.intknight.pokedex.caller.Request
-import com.intknight.pokedex.doa.DescriptionService
 import com.intknight.pokedex.doa.PokemonModel
-import com.intknight.pokedex.doa.PokemonService
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Future
-import java.util.concurrent.FutureTask
-
-import kotlin.Exception
-import kotlin.collections.ArrayList
-import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -92,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         if (extra != null)createPage(extra)
 
         else createPage()
+        ////////////////////////////////////////////////////////////////
 
 
         imageSeek.setOnSeekBarChangeListener(
