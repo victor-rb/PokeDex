@@ -3,8 +3,10 @@ package com.intknight.pokedex
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var pokeNameTx: TextView
     lateinit var pokeTypeTx: TextView
-    lateinit var pokeWeightTx: TextView
+    //lateinit var pokeWeightTx: TextView
     lateinit var statHpTx: TextView
     lateinit var statAtkTx: TextView
     lateinit var statDefTx: TextView
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         pokeNameTx = findViewById(R.id.pokenameTX)
         pokeTypeTx = findViewById(R.id.pokeTypeTX)
-        pokeWeightTx = findViewById(R.id.pokeWeightTX)
+        //pokeWeightTx = findViewById(R.id.pokeWeightTX)
 
         statHpTx = findViewById(R.id.hpTX)
         statAtkTx = findViewById(R.id.atkTX)
@@ -125,6 +127,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        pokeDeskTx.movementMethod
+
     }
 
     private fun createPage(index: String = "1") {
@@ -141,7 +145,7 @@ class MainActivity : AppCompatActivity() {
 
         pokeNameTx.text = pokemon.name.capitalize()
         pokeTypeTx.text = Html.fromHtml(pokemon.type)
-        pokeWeightTx.text = "${pokemon.weight} | ${pokemon.shape.capitalize()}"
+        //pokeWeightTx.text = "${pokemon.weight} | ${pokemon.shape.capitalize()}"
 
         statHpTx.text = pokemon.stats[0]
         statAtkTx.text = pokemon.stats[1]
@@ -149,6 +153,7 @@ class MainActivity : AppCompatActivity() {
         statSpdTx.text = pokemon.stats[3]
         statXatkTx.text = pokemon.stats[4]
         statXdefTx.text = pokemon.stats[5]
+
 
         pokeDeskTx.text = pokemon.entry
 

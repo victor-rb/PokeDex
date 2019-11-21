@@ -12,70 +12,82 @@
             android:id="@+id/pokeImage" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:scaleType="fitCenter"/>
+
     <TextView
+            android:id="@+id/pokeNameLB"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/pokeNameLB" app:layout_constraintStart_toEndOf="@+id/pokeImage"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:textSize="24sp"
-            android:textAlignment="center" android:text="Name"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/pokenameTX"
-            app:layout_constraintTop_toBottomOf="@+id/pokeNameLB" android:textSize="24sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Name"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@+id/pokeNameLB" app:layout_constraintEnd_toEndOf="@+id/pokeNameLB"/>
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pokeImage"
+            app:layout_constraintTop_toTopOf="@+id/pokeImage" />
+
     <TextView
-            android:text="Type"
+            android:id="@+id/pokenameTX"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#113469"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/pokeNameLB"
+            app:layout_constraintStart_toStartOf="@+id/pokeNameLB"
+            app:layout_constraintTop_toBottomOf="@+id/pokeNameLB" />
+
+    <TextView
             android:id="@+id/pokeTypeLB"
-            app:layout_constraintTop_toBottomOf="@+id/pokenameTX"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Type"
+            android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/pokenameTX"
-            android:textAlignment="center" android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/pokenameTX"/>
+            app:layout_constraintStart_toStartOf="@+id/pokenameTX"
+            app:layout_constraintTop_toBottomOf="@+id/pokenameTX" />
+
     <TextView
+            android:id="@+id/pokeTypeTX"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" android:id="@+id/pokeTypeTX"
-            app:layout_constraintTop_toBottomOf="@+id/pokeTypeLB" app:layout_constraintEnd_toEndOf="@+id/pokeTypeLB"
-            android:textAlignment="center" android:textSize="22dp"
-            app:layout_constraintStart_toStartOf="@+id/pokeTypeLB"/>
-    <TextView
-            android:text="Weight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/pokeWeightLB"
-            app:layout_constraintTop_toBottomOf="@+id/pokeTypeTX" app:layout_constraintStart_toStartOf="@+id/pokeTypeTX"
-            app:layout_constraintEnd_toEndOf="@+id/pokeTypeTX" android:textSize="24sp" android:textAlignment="center"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/pokeWeightTX"
-            app:layout_constraintTop_toBottomOf="@+id/pokeWeightLB" app:layout_constraintEnd_toEndOf="@+id/pokeWeightLB"
-            app:layout_constraintStart_toStartOf="@+id/pokeWeightLB" android:textSize="24sp"
-            android:textAlignment="center" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/pokeImage"/>
+            android:textAlignment="center"
+            android:textSize="22dp"
+            app:layout_constraintBottom_toTopOf="@+id/swShiny"
+            app:layout_constraintEnd_toEndOf="@+id/pokeTypeLB"
+            app:layout_constraintStart_toStartOf="@+id/pokeTypeLB"
+            app:layout_constraintTop_toBottomOf="@+id/pokeTypeLB" />
+
     <SeekBar
+            android:id="@+id/imageSeekBar"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/imageSeekBar" app:layout_constraintStart_toStartOf="@+id/pokeImage"
-            app:layout_constraintEnd_toEndOf="@+id/pokeImage" app:layout_constraintTop_toBottomOf="@+id/pokeImage"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/swShiny"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/swShiny"
+            app:layout_constraintEnd_toEndOf="@+id/pokeImage"
+            app:layout_constraintStart_toStartOf="@+id/pokeImage"
+            app:layout_constraintTop_toBottomOf="@+id/pokeImage" />
+
     <Switch
-            android:text="Shiny  "
+            android:id="@+id/swShiny"
+            style="?attr/switchStyle"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/swShiny" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/pokeWeightTX"
-            app:layout_constraintStart_toStartOf="@+id/pokeWeightTX"
-            app:layout_constraintEnd_toEndOf="@+id/pokeWeightTX"
-            android:textSize="18sp" android:textAlignment="textEnd"
-            style="?attr/switchStyle"/>
+            android:layout_marginStart="8dp"
+            android:text="Shiny  "
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageSeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/pokeImage" />
     <View
             android:id="@+id/dividerH"
             android:layout_width="395dp"
@@ -186,16 +198,28 @@
             android:textSize="24sp" android:textAlignment="center" android:textColor="#0683AF" tools:text="20"
             app:layout_constraintEnd_toEndOf="@+id/xatkTX" app:layout_constraintStart_toStartOf="@+id/xatkTX"
             app:layout_constraintTop_toBottomOf="@+id/xatkTX"/>
+
     <TextView
-            android:text="TextView"
+            android:id="@+id/descTX"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/descTX"
-            app:layout_constraintTop_toBottomOf="@+id/swShiny" app:layout_constraintStart_toEndOf="@+id/dividerV"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:focusable="auto"
+            android:focusableInTouchMode="true"
+            android:scrollbars="vertical"
+            android:defaultFocusHighlightEnabled="true"
+            android:focusedByDefault="true"
+            android:isScrollContainer="true"
+            android:overScrollMode="ifContentScrolls"
+            android:text="TextView"
             android:textSize="18sp"
-            android:layout_marginTop="8dp" app:layout_constraintBottom_toTopOf="@+id/divider"
-            android:scrollbars="vertical"/>
+            android:verticalScrollbarPosition="right"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dividerV"
+            app:layout_constraintTop_toBottomOf="@+id/swShiny" />
     <View
             android:id="@+id/divider"
             android:layout_width="395dp"
@@ -220,9 +244,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintTop_toBottomOf="@+id/divider"
             android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/textView"
-            android:layout_marginStart="8dp" android:hint="Insert Pkmn Number : #802" android:textAlignment="center"
-            android:isScrollContainer="true" android:overScrollMode="ifContentScrolls"
-            android:nestedScrollingEnabled="true"/>
+            android:layout_marginStart="8dp" android:hint="Insert Pkmn Number : #802" android:textAlignment="center" />
     <Button
             android:text="Search By Name - List"
             android:layout_width="0dp"

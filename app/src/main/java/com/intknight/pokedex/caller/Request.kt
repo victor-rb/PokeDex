@@ -58,9 +58,9 @@ object Request {
                 body.stats[1].baseStat
             )
 
-            var bufferString = "| "
+            var bufferString = ""
             for (i in 0 until body.types.size) {
-                bufferString += "${setColor(body.types[i].type!!.name)} | "
+                bufferString += "${setColor(body.types[i].type!!.name)} <br>"
             }
 
             pokemon.type = bufferString
