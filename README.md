@@ -32,5 +32,5 @@ of the resources, but it`s my way of developing my skills in kotlyn (I used JAVA
 of the moment, I am open to Suggestion and feedback.
 
 Someday the App will be on Play Store, I just dont have the re$ources to do it now, but the APK is on the following 
-share. https://github.com/victor-rb/PokeDex/blob/master/Pokedex_v1.1.apk
+share. https://github.com/victor-rb/PokeDex/raw/master/PokedexAPP.apk
 
