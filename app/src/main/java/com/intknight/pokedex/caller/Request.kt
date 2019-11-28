@@ -1,7 +1,6 @@
 package com.intknight.pokedex.caller
 
 import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.os.AsyncTask.execute
 import android.util.Log
 import com.intknight.pokedex.doa.DescriptionService
@@ -16,7 +15,7 @@ object Request {
 
     private val pokemon = PokemonModel()
 
-    private val baseUrl = "https://pokeapi.co/api/v2/"
+    private const val baseUrl = "https://pokeapi.co/api/v2/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -25,8 +24,6 @@ object Request {
 
 
     private fun requestPokemon(index: String): PokemonModel {
-
-
 
 
         val pokeService = retrofit.create(PokemonService::class.java)
@@ -44,9 +41,21 @@ object Request {
 
             pokemon.sprite.clear()
             pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.frontDefault).openStream()))
-            if (body.sprites?.backDefault != null) pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backDefault).openStream()))
+            if (body.sprites?.backDefault != null) pokemon.sprite.add(
+                BitmapFactory.decodeStream(
+                    URL(
+                        body.sprites?.backDefault
+                    ).openStream()
+                )
+            )
             pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.frontShiny).openStream()))
-            if (body.sprites?.backShiny != null) pokemon.sprite.add(BitmapFactory.decodeStream(URL(body.sprites?.backShiny).openStream()))
+            if (body.sprites?.backShiny != null) pokemon.sprite.add(
+                BitmapFactory.decodeStream(
+                    URL(
+                        body.sprites?.backShiny
+                    ).openStream()
+                )
+            )
 
 
             pokemon.stats = arrayListOf(
@@ -79,7 +88,7 @@ object Request {
             pokemon.shape = pokeBody.shape!!.name
         }
 
-        while (!callPoke.isExecuted || !callDesc.isExecuted){
+        while (!callPoke.isExecuted || !callDesc.isExecuted) {
             Log.d("Exec |", "${callPoke.isExecuted} : ${callDesc.isExecuted}")
         }
 
@@ -117,21 +126,21 @@ object Request {
         return requestPokemon(index)
     }
 
-    fun getToList() : ArrayList<String>{
+    fun getToList(): ArrayList<String> {
 
-        var pokemonList = ArrayList<String>()
+        val pokemonList = ArrayList<String>()
 
         val pokelistService = retrofit.create(PokeListService::class.java)
         val call = pokelistService.getPokemonItem()
 
-        execute{
+        execute {
             val body = call.execute().body()!!
 
-            for (i in 0 until  body.result.size){
+            for (i in 0 until body.result.size) {
                 pokemonList.add(body.result[i].name)
             }
 
-            while(!call.isExecuted){
+            while (!call.isExecuted) {
                 Log.d("Log Body |", "Wait...")
             }
 

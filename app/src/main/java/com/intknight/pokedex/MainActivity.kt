@@ -3,10 +3,8 @@ package com.intknight.pokedex
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
