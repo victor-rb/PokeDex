@@ -33,4 +33,4 @@ mas é como eu uso para aprimorar minhas habilidades em kotlyn e frameworks da a
 Estou Aberto á Criticas e Sugestões.
 
 Algum dia eu coloco o aplicativo na PlayStore, por enquanto não tenho o recurso($) para faze-lo, porém o aplicativo pode
-ser encontrado aqui no guito no seguinte diretorio. https://github.com/victor-rb/PokeDex/blob/master/Pokedex_v1.1.apk
+ser encontrado aqui no guito no seguinte diretorio. https://github.com/victor-rb/PokeDex/raw/master/PokedexAPP.apk
